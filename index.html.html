@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Hello</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffcccb, #ff99cc);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: auto; /* Changed to allow height to adjust */
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+            position: relative;
+            z-index: 2;
+            font-style: italic;
+            display: none; /* Initially hidden */
+        }
+        h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 20px;
+            display: none; /* Initially hidden */
+        }
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+        }
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ff99cc;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            position: relative;
+            z-index: 1;
+            display: none; /* Initially hidden */
+        }
+        input:focus {
+            border-color: #ff66b2;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #ff66b2;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        button:hover {
+            background-color: #ff4d94;
+            transform: scale(1.05);
+        }
+        #submitButton {
+            background-color: #b3004c; /* Dark pink */
+            margin-top: 10px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            animation: slideIn 0.5s ease-in;
+            max-width: 400px;
+            width: 100%;
+            font-family: 'Lobster', cursive;
+            font-size: 1.5em;
+            color: #333;
+            position: relative;
+            z-index: 1;
+            background-color: transparent;
+            background-image: linear-gradient(to right, #ff66b2, #ff4d94);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: pink;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: glow 1.5s infinite alternate;
+            box-shadow: 0 0 20px pink;
+            z-index: 0;
+        }
+
+        .heart:nth-child(1) { top: 5%; left: 10%; }
+        .heart:nth-child(2) { top: 5%; left: 80%; }
+        .heart:nth-child(3) { top: 20%; left: 30%; }
+        .heart:nth-child(4) { top: 20%; left: 70%; }
+        .heart:nth-child(5) { top: 35%; left: 15%; }
+        .heart:nth-child(6) { top: 35%; left: 85%; }
+        .heart:nth-child(7) { top: 50%; left: 25%; }
+        .heart:nth-child(8) { top: 50%; left: 75%; }
+        .heart:nth-child(9) { top: 65%; left: 40%; }
+        .heart:nth-child(10) { top: 65%; left: 60%; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes glow {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <h1>The Proposal</h1>
+    <h2 id="proposalHeading">Do you want to propose?</h2>
+    <h2 id="instructionHeading" style="display:none;">If you want to propose click on yes, else click on no</h2>
+    <label for="num">How many times do you want to say I Love YOU?</label>
+    <input type="number" id="num" min="1" required>
+    <button id="yesButton" onclick="showContent()">Yes</button>
+    <button id="noButton" onclick="moveNoButton()">No</button>
+
+    <div id="output"></div>
+
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    
+    <script>
+        // Alert to notify user
+        alert("Click yes if you want to propose and no if you don't want to");
+
+        function showContent() {
+            document.querySelector('h1').style.display = 'block';
+            document.getElementById('proposalHeading').style.display = 'none'; // Hide the proposal heading
+            document.getElementById('instructionHeading').style.display = 'none'; // Hide the instruction heading
+            document.querySelector('label').style.display = 'block';
+            document.querySelector('input').style.display = 'block';
+            document.getElementById('yesButton').style.display = 'none'; // Hide Yes button
+            document.getElementById('noButton').style.display = 'none'; // Hide No button
+            
+            // Create and display the submit button
+            const submitButton = document.createElement('button');
+            submitButton.id = 'submitButton';
+            submitButton.textContent = 'Submit';
+            submitButton.onclick = printHello;
+            document.body.appendChild(submitButton);
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById('noButton');
+            noButton.style.position = 'absolute';
+            noButton.style.top = Math.random() * 90 + 'vh'; // Random vertical position
+            noButton.style.left = Math.random() * 90 + 'vw'; // Random horizontal position
+        }
+
+        function printHello() {
+            const num = document.getElementById('num').value;
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+
+            if (num < 1) {
+                outputDiv.innerHTML = 'Please enter a positive integer.';
+                return;
+            }
+
+            for (let i = 0; i < num; i++) {
+                outputDiv.innerHTML += 'I Love You<br>';
+            }
+        }
+        
+        document.querySelector('input').addEventListener('change', printHello);
+    </script>
+</body>
+</html>
